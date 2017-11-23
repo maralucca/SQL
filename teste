@@ -1,0 +1,3 @@
+sqlcmd -S SCXTP0089CLD -d GML -Q "set nocount on; set ansi_warnings off;  SELECT id, name,startdate ,endate, color FROM PORTAL.BANCARIOS  ORDER BY CRITICIDADE FOR JSON PATH, ROOT('monthly');" -o output.js -s ";" -W -w 60000 -E /*type output.tmp | findstr /V \-\,\- >  output.jsdel output.tmp
+
+for /f "skip=2 delims=*" %%a in (output.js) do (echo %%a >>newoutput.js    )xcopy newoutput.js output.js /y/*xcopy output.js  \\spcorp1.itau\sites\mqi\dashboard\js\bancarios.js*/del newoutput.js /f /q
